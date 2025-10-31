@@ -15,5 +15,35 @@ form.addEventListener('submit', function(buttonEvent) {
     buttonEvent.preventDefault();
     console.log("Form submitted!");  // This is to check if the form is working
     let userPassword = passwordInput.value;
+    let strength = checkPasswordStrength(userPassword);
+    console.log(strength);
     console.log(userPassword);
 });
+
+// This section will check the password strength
+function checkPasswordStrength(password) {
+    let score = 0;
+    if(password.length >= 12) {
+        score = score + 1;
+    }
+    if(/[A-Z]/.test(password)) {
+        score = score + 1;
+    }
+    if(/[a-z]/.test(password)) {
+        score = score + 1;
+    }
+
+    if(/[0-9]/.test(password)) {
+        score = score + 1;
+    }
+    if (/[!@#$%^&*()]/.test(password)) {
+        score = score + 1;
+    }
+   if (score <= 2) {
+    return "Weak";
+} else if (score <= 4) {
+    return "Medium";
+} else {
+    return "Strong";
+}
+}
